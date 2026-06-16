@@ -2084,19 +2084,17 @@ function renderDeviceDetail(d){
 function renderCustomers(){
   document.getElementById('topbar-actions').innerHTML=`<button class="btn btn-primary" onclick="openCustomerForm()">+ Add Customer</button>`;
   const customers=DB.all('customers');
-  const devices=DB.all('devices');
   document.getElementById('content').innerHTML=`
   <div class="card">
     <div class="section-hdr"><h3>Customers / Sources (${customers.length})</h3></div>
-    ${customers.length===0?`<div class="empty"><div class="ei">🏢</div><p>No customers added yet. Add your first customer or they'll be created from Reception entries.</p></div>`:
+    ${customers.length===0?`<div class="empty"><div class="ei">🏢</div><p>No customers yet. Click + Add Customer to get started.</p></div>`:
     `<div class="tbl-wrap"><table>
-      <thead><tr><th>Name</th><th>Contact</th><th>Email</th><th>Phone</th><th>Devices</th><th>Actions</th></tr></thead>
+      <thead><tr><th>Name</th><th>Contact</th><th>Email</th><th>Phone</th><th>Actions</th></tr></thead>
       <tbody>${customers.map(c=>`<tr>
         <td><strong>${c.name}</strong></td>
         <td>${c.contact||'—'}</td>
         <td>${c.email||'—'}</td>
         <td>${c.phone||'—'}</td>
-        <td>${devices.filter(d=>d.source===c.name).length}</td>
         <td>
           <button class="btn btn-sm btn-secondary" onclick="openCustomerForm('${c.id}')">Edit</button>
           <button class="btn btn-sm btn-danger" onclick="deleteCustomer('${c.id}')" style="margin-left:4px">Del</button>
