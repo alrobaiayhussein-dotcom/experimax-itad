@@ -88,8 +88,8 @@ tr:hover td{background:#fafbfd}tr:last-child td{border-bottom:none}
 .alert-info{background:#dbeafe;color:#1e3a8a;border:1px solid #bfdbfe}
 .alert-success{background:#dcfce7;color:#14532d;border:1px solid #bbf7d0}
 .alert-red{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5}
-.check-group{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-top:4px}
-.check-item{display:flex;align-items:center;gap:6px;background:#f8fafc;border:1px solid var(--border);border-radius:6px;padding:8px 10px;cursor:pointer;font-size:13px;user-select:none;transition:.1s;word-break:break-word}
+.check-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.check-item{display:inline-flex;align-items:center;gap:6px;background:#f8fafc;border:1px solid var(--border);border-radius:6px;padding:8px 12px;cursor:pointer;font-size:13px;user-select:none;transition:.1s;white-space:nowrap}
 .check-item:hover{border-color:var(--primary);background:#eff6ff}
 .check-item input{cursor:pointer;margin:0;flex-shrink:0}
 .check-item.checked{border-color:var(--primary);background:#eff6ff;color:var(--primary);font-weight:600}
@@ -155,8 +155,7 @@ tr:hover td{background:#fafbfd}tr:last-child td{border-bottom:none}
   #scan-bar{width:130px!important}
   .chart-wrap{height:160px}
   .info-grid{grid-template-columns:1fr}
-  .check-group{grid-template-columns:1fr 1fr}
-  .check-item{padding:9px 10px}
+  .check-item{padding:9px 12px;font-size:14px}
 }
 
 @media(max-width:480px){
