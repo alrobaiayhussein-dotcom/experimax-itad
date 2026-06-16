@@ -89,10 +89,9 @@ tr:hover td{background:#fafbfd}tr:last-child td{border-bottom:none}
 .alert-success{background:#dcfce7;color:#14532d;border:1px solid #bbf7d0}
 .alert-red{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5}
 .check-group{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-top:4px}
-.check-item{display:flex;align-items:center;gap:6px;background:#f8fafc;border:1px solid var(--border);border-radius:6px;padding:8px 10px;cursor:pointer;font-size:13px;user-select:none;transition:.1s;min-width:0}
+.check-item{display:flex;align-items:center;gap:6px;background:#f8fafc;border:1px solid var(--border);border-radius:6px;padding:8px 10px;cursor:pointer;font-size:13px;user-select:none;transition:.1s;word-break:break-word}
 .check-item:hover{border-color:var(--primary);background:#eff6ff}
 .check-item input{cursor:pointer;margin:0;flex-shrink:0}
-.check-item span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .check-item.checked{border-color:var(--primary);background:#eff6ff;color:var(--primary);font-weight:600}
 .timeline{border-left:2px solid var(--border);margin-left:12px;padding-left:18px}
 .tl-item{position:relative;margin-bottom:16px;padding-bottom:4px}
@@ -755,7 +754,7 @@ function openReceptionForm(){
       <label>Accessories Received</label>
       <div class="check-group" id="acc-group">
         ${ACCESSORIES.map(a=>`<label class="check-item" id="acc-${a.replace(/\s/g,'')}">
-          <input type="checkbox" value="${a}" onchange="toggleAcc(this)"><span>${a}</span>
+          <input type="checkbox" value="${a}" onchange="toggleAcc(this)"> ${a}
         </label>`).join('')}
       </div>
     </div>
@@ -1114,7 +1113,7 @@ function openDeviceEditForm(deviceId){
     <div class="fg"><label>Accessories</label>
       <div class="check-group" id="ed-acc-group">
         ${ACCESSORIES.map(a=>`<label class="check-item${(d.accessories||[]).includes(a)?' checked':''}">
-          <input type="checkbox" value="${a}" ${(d.accessories||[]).includes(a)?'checked':''} onchange="this.closest('.check-item').classList.toggle('checked',this.checked)"><span>${a}</span>
+          <input type="checkbox" value="${a}" ${(d.accessories||[]).includes(a)?'checked':''} onchange="this.closest('.check-item').classList.toggle('checked',this.checked)"> ${a}
         </label>`).join('')}
       </div>
     </div>
@@ -1233,7 +1232,7 @@ function openInspectionSaleForm(deviceId){
       </div>
     </div>
     <div class="fg"><label>Included Accessories for Sale</label>
-      <div class="check-group" id="acc-sale-group">${ACCESSORIES.map(a=>`<label class="check-item"><input type="checkbox" value="${a}" onchange="this.closest('.check-item').classList.toggle('checked',this.checked)"><span>${a}</span></label>`).join('')}</div>
+      <div class="check-group" id="acc-sale-group">${ACCESSORIES.map(a=>`<label class="check-item"><input type="checkbox" value="${a}" onchange="this.closest('.check-item').classList.toggle('checked',this.checked)"> ${a}</label>`).join('')}</div>
     </div>
     <div class="fg"><label>Inspection Notes</label><textarea id="isp-notes" rows="2"></textarea></div>
     <div class="form-actions">
