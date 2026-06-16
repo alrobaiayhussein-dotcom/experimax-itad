@@ -148,16 +148,15 @@ tr:hover td{background:#fafbfd}tr:last-child td{border-bottom:none}
   .form-row,.form-row-3{grid-template-columns:1fr}
   .form-full{grid-column:1}
   .overlay{padding:6px;align-items:flex-end}
-  .modal{border-radius:12px 12px 0 0;max-height:92vh;padding:16px}
-  .modal-lg,.modal-xl{width:100%}
+  .modal,.modal-lg,.modal-xl{width:calc(100vw - 12px)!important;max-width:calc(100vw - 12px)!important;border-radius:12px 12px 0 0;max-height:92vh;padding:16px;overflow-x:hidden}
   table{font-size:12px}
   th,td{padding:6px 8px}
   .btn{padding:7px 11px;font-size:12px}
   #scan-bar{width:130px!important}
   .chart-wrap{height:160px}
   .info-grid{grid-template-columns:1fr}
-  .check-group{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .check-item{white-space:normal;padding:9px 10px;font-size:13px;border-radius:8px}
+  .check-group{display:grid!important;grid-template-columns:1fr 1fr;gap:8px}
+  .check-item{white-space:normal!important;padding:9px 10px;font-size:13px;border-radius:8px;min-width:0;overflow:hidden}
 }
 
 @media(max-width:480px){
