@@ -2289,16 +2289,6 @@ function clearAllData(){
   });
 })();
 
-// Seed default customers (only if not already present)
-(function seedCustomers(){
-  const defaults=['Vacasa','Avarii','Middlebury'];
-  const existing=DB.all('customers').map(c=>c.name);
-  defaults.forEach(name=>{
-    if(!existing.includes(name)){
-      DB.save('customers',{id:DB.newId('CUS'),name,contact:'',email:'',phone:'',address:'',notes:''});
-    }
-  });
-})();
 
 // Login on load
 // ── App startup (async — loads Supabase data first) ──────────────────────
@@ -2320,8 +2310,6 @@ function clearAllData(){
     console.error('Supabase init failed',e);
     return;
   }
-  // Seed default data
-  try{seedCustomers();}catch(e){console.warn('seed',e);}
   // Hide loading
   if(loadingEl) loadingEl.style.display='none';
   // Employee login flow
