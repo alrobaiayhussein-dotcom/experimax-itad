@@ -89,9 +89,9 @@ tr:hover td{background:#fafbfd}tr:last-child td{border-bottom:none}
 .alert-success{background:#dcfce7;color:#14532d;border:1px solid #bbf7d0}
 .alert-red{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5}
 .check-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
-.check-item{display:flex;align-items:center;gap:5px;background:#f8fafc;border:1px solid var(--border);border-radius:6px;padding:5px 10px;cursor:pointer;font-size:12px;user-select:none;transition:.1s}
+.check-item{display:flex;align-items:center;gap:5px;background:#f8fafc;border:1px solid var(--border);border-radius:6px;padding:5px 10px;cursor:pointer;font-size:12px;user-select:none;transition:.1s;white-space:nowrap}
 .check-item:hover{border-color:var(--primary);background:#eff6ff}
-.check-item input{cursor:pointer;margin:0}
+.check-item input{cursor:pointer;margin:0;flex-shrink:0}
 .check-item.checked{border-color:var(--primary);background:#eff6ff;color:var(--primary);font-weight:600}
 .timeline{border-left:2px solid var(--border);margin-left:12px;padding-left:18px}
 .tl-item{position:relative;margin-bottom:16px;padding-bottom:4px}
@@ -156,6 +156,8 @@ tr:hover td{background:#fafbfd}tr:last-child td{border-bottom:none}
   #scan-bar{width:130px!important}
   .chart-wrap{height:160px}
   .info-grid{grid-template-columns:1fr}
+  .check-group{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .check-item{white-space:normal;padding:9px 10px;font-size:13px;border-radius:8px}
 }
 
 @media(max-width:480px){
