@@ -115,6 +115,54 @@ tr:hover td{background:#fafbfd}tr:last-child td{border-bottom:none}
 .profit-neg{color:var(--danger);font-weight:700}
 ::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:3px}
 @media print{#sidebar,#topbar,.no-print{display:none!important}#content{padding:0}}
+
+/* ── Responsive / Mobile ──────────────────────────────── */
+#menu-toggle{display:none;background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;padding:4px 6px;line-height:1;flex-shrink:0}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:299;cursor:pointer}
+.sidebar-overlay.open{display:block}
+
+@media(max-width:1024px){
+  #sidebar{width:180px}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:1fr 1fr}
+  .modal-lg,.modal-xl{width:96vw}
+}
+
+@media(max-width:768px){
+  body{overflow:auto}
+  #sidebar{
+    position:fixed;left:0;top:0;bottom:0;z-index:300;width:230px;
+    transform:translateX(-100%);transition:transform .22s ease;
+  }
+  #sidebar.open{transform:translateX(0)}
+  #menu-toggle{display:block}
+  #main{flex:1;min-width:0;overflow:hidden}
+  #topbar{padding:8px 12px;gap:8px;flex-wrap:wrap}
+  #topbar h2{font-size:14px}
+  #topbar-actions{flex-wrap:wrap;gap:6px;width:100%}
+  #content{padding:12px;overflow-x:hidden}
+  .stats-grid{grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+  .stat-card{padding:12px}
+  .stat-value{font-size:20px}
+  .grid-2,.grid-3{grid-template-columns:1fr}
+  .form-row,.form-row-3{grid-template-columns:1fr}
+  .form-full{grid-column:1}
+  .overlay{padding:6px;align-items:flex-end}
+  .modal{border-radius:12px 12px 0 0;max-height:92vh;padding:16px}
+  .modal-lg,.modal-xl{width:100%}
+  table{font-size:12px}
+  th,td{padding:6px 8px}
+  .btn{padding:7px 11px;font-size:12px}
+  #scan-bar{width:130px!important}
+  .chart-wrap{height:160px}
+  .info-grid{grid-template-columns:1fr}
+}
+
+@media(max-width:480px){
+  .stats-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .stat-value{font-size:18px}
+  .stat-card{padding:10px}
+}
 .label-print{font-family:monospace;background:#fff;border:2px solid #000;padding:12px;display:inline-block;text-align:center;min-width:280px}
 .label-print .lbl-title{font-size:13px;font-weight:700;margin-bottom:4px}
 .label-print .lbl-sub{font-size:11px;margin-bottom:6px}
@@ -172,10 +220,15 @@ tr:hover td{background:#fafbfd}tr:last-child td{border-bottom:none}
   </div>
 </div>
 
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+
 <div id="main">
   <div id="topbar">
-    <h2 id="page-title">Dashboard</h2>
-    <div id="topbar-actions" style="display:flex;gap:8px;align-items:center"></div>
+    <div style="display:flex;align-items:center;gap:8px;min-width:0">
+      <button id="menu-toggle" onclick="toggleSidebar()" aria-label="Menu">☰</button>
+      <h2 id="page-title">Dashboard</h2>
+    </div>
+    <div id="topbar-actions" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"></div>
   </div>
   <div id="content"></div>
 </div>
@@ -2264,6 +2317,21 @@ function clearAllData(){
 // ═══════════════════════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════════════════════
+// ── Sidebar toggle (mobile) ────────────────────────────────────────────────
+function toggleSidebar(){
+  const sb=document.getElementById('sidebar');
+  const ov=document.getElementById('sidebar-overlay');
+  sb.classList.toggle('open');
+  ov.classList.toggle('open');
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebar-overlay').classList.remove('open');
+}
+document.getElementById('sidebar').addEventListener('click',function(e){
+  if(e.target.closest('.nav-item')&&window.innerWidth<=768) closeSidebar();
+});
+
 // Global barcode scanner listener (USB HID scanners type fast + Enter)
 (function(){
   let buf='',timer=null;
